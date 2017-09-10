@@ -1,0 +1,6 @@
+name: DungeonAPI
+authors: [Zeryther]
+website: https://wrathofdungeons.net
+version: 1.0
+main: net.wrathofdungeons.dungeonapi.DungeonAPI
+softdepend: [HolographicDisplays]
