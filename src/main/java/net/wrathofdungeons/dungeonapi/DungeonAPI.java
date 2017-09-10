@@ -10,6 +10,10 @@ public class DungeonAPI extends JavaPlugin {
         saveDefaultConfig();
     }
 
+    public void onDisable(){
+        MySQLManager.getInstance().unload();
+    }
+
     public static DungeonAPI getInstance(){
         return instance;
     }
