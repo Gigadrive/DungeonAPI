@@ -7,6 +7,7 @@ public class DungeonAPI extends JavaPlugin {
 
     public void onEnable(){
         instance = this;
+        saveDefaultConfig();
     }
 
     public static DungeonAPI getInstance(){
