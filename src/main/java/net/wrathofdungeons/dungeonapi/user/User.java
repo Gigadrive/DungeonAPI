@@ -112,6 +112,10 @@ public class User {
         }
     }
 
+    public void connect(String server){
+        DungeonAPI.sendPlayerToServer(p.getName(),server);
+    }
+
     public void saveData(){
         DungeonAPI.async(() -> {
             try {
