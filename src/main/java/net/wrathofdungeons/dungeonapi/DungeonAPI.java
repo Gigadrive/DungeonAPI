@@ -4,6 +4,8 @@ import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
 import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.PlayerChatListener;
 import net.wrathofdungeons.dungeonapi.listener.PlayerCommandListener;
+import net.wrathofdungeons.dungeonapi.listener.PlayerJoinListener;
+import net.wrathofdungeons.dungeonapi.listener.PlayerQuitListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,6 +37,8 @@ public class DungeonAPI extends JavaPlugin {
     private void registerListeners(){
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerCommandListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
     }
 
     private void registerCommands(){
