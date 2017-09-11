@@ -9,6 +9,15 @@ public class Util {
     public static final String LINE_SEPERATOR = ChatColor.STRIKETHROUGH.toString() + "----------------------------------------------------";
     public static final String SCOREBOARD_LINE_SEPERATOR = ChatColor.DARK_GRAY + "---------------";
 
+    public static final int INVENTORY_1ROW = 9;
+    public static final int INVENTORY_2ROWS = 9*2;
+    public static final int INVENTORY_3ROWS = 9*3;
+    public static final int INVENTORY_4ROWS = 9*4;
+    public static final int INVENTORY_5ROWS = 9*5;
+    public static final int INVENTORY_6ROWS = 9*6;
+
+    public static final int MAX_INVENTORY_SIZE = INVENTORY_6ROWS;
+
     public static boolean isValidInteger(String s){
         try {
             int i = Integer.parseInt(s);
