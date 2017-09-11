@@ -3,10 +3,12 @@ package net.wrathofdungeons.dungeonapi;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import de.dytanic.cloudnet.api.CloudAPI;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
 import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.*;
+import net.wrathofdungeons.dungeonapi.util.BarUtil;
 import net.wrathofdungeons.dungeonapi.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -38,6 +40,30 @@ public class DungeonAPI extends JavaPlugin {
 
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "TheChest");
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while(true) {
+                    for(String s : BarUtil.getPlayers()) {
+                        Player o = Bukkit.getPlayer(s);
+                        if(o != null) BarUtil.teleportBar(o);
+                    }
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }).start();
+    }
+
+    public static String getServerName(){
+        return CloudAPI.getInstance().getServerId();
     }
 
     public void onDisable(){
