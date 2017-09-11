@@ -10,9 +10,21 @@ public class Command {
     private String[] names;
     private Rank minRank;
 
+    public Command(String name){
+        this.names = new String[]{name};
+        this.minRank = Rank.USER;
+        register();
+    }
+
     public Command(String[] names){
         this.names = names;
         this.minRank = Rank.USER;
+        register();
+    }
+
+    public Command(String name, Rank minRank){
+        this.names = new String[]{name};
+        this.minRank = minRank;
         register();
     }
 
