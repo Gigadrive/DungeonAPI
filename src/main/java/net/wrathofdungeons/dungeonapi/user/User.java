@@ -48,6 +48,8 @@ public class User {
     private Scoreboard scoreboard;
 
     public User(Player p){
+        if(STORAGE.containsKey(p)) return;
+
         this.p = p;
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 
