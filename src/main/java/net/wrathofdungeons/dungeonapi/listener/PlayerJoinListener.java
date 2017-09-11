@@ -18,5 +18,6 @@ public class PlayerJoinListener implements Listener {
     public void onLoaded(PlayerCoreDataLoadedEvent e){
         Player p = e.getPlayer();
         User u = User.getUser(p);
+        u.updateTabList();
     }
 }
