@@ -1,9 +1,9 @@
 package org.inventivetalent.menubuilder.chat;
 
-import eu.thechest.chestapi.ChestAPI;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.wrathofdungeons.dungeonapi.DungeonAPI;
 import org.inventivetalent.menubuilder.chat.component.MenuComponent;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class LineBuilder {
 	 */
 	public LineBuilder append(ChatListener listener, BaseComponent... components) {
 		for (BaseComponent component : components) {
-			String key = ChestAPI.getInstance().chatCommandListener.registerListener(listener);
+			String key = DungeonAPI.getInstance().chatCommandListener.registerListener(listener);
 			component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/mbchat " + key));
 			listenerKeys.add(key);
 
