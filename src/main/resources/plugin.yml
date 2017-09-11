@@ -4,3 +4,7 @@ website: https://wrathofdungeons.net
 version: 1.0
 main: net.wrathofdungeons.dungeonapi.DungeonAPI
 softdepend: [HolographicDisplays]
+
+commands:
+  mbchat:
+    description: mbchat
