@@ -104,9 +104,8 @@ public class User {
 
                 Team team = u.getScoreboard().getTeam(teamName);
 
-                if(team == null) u.getScoreboard().registerNewTeam(teamName);
+                if(team == null) team = u.getScoreboard().registerNewTeam(teamName);
 
-                team.setDisplayName(p.getName());
                 team.setPrefix(getRank().getColor().toString());
                 team.addEntry(p.getName());
             }
