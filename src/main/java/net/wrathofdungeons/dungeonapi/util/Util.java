@@ -1,6 +1,7 @@
 package net.wrathofdungeons.dungeonapi.util;
 
 import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -33,6 +34,36 @@ public class Util {
         } else {
             return 0;
         }
+    }
+
+    public static ItemStack parseItemStack(String s){
+        if(s == null){
+            return null;
+        } else {
+            String[] sp = s.split(":");
+            if(sp.length == 1){
+                if(Util.isValidInteger(sp[0])){
+                    return ItemUtil.setUnbreakable(new ItemStack(Integer.parseInt(sp[0])),true);
+                } else {
+                    return null;
+                }
+            } else if(sp.length == 2){
+                if(Util.isValidInteger(sp[0]) && Util.isValidInteger(sp[1])){
+                    return ItemUtil.setUnbreakable(new ItemStack(Integer.parseInt(sp[0]),0,(short)Integer.parseInt(sp[1])),true);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public static int getIntegerDifference(int i, int ii){
+        int n = i - ii;
+        String b = String.valueOf(n);
+        b = b.replace("-", "");
+        return Integer.parseInt(b);
     }
 
     public static boolean getChanceBoolean(int chanceTrue, int chanceFalse){
