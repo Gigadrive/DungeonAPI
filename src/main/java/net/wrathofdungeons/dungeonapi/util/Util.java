@@ -1,6 +1,7 @@
 package net.wrathofdungeons.dungeonapi.util;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -57,6 +58,10 @@ public class Util {
                 return null;
             }
         }
+    }
+
+    public static boolean isLocationEqual(Location loc1, Location loc2){
+        return loc1.getWorld().getName().equals(loc2.getWorld().getName()) && loc1.getX() == loc2.getX() && loc1.getY() == loc2.getY() && loc1.getZ() == loc2.getZ() && loc1.getYaw() == loc2.getYaw() && loc1.getPitch() == loc2.getPitch();
     }
 
     public static int getIntegerDifference(int i, int ii){
