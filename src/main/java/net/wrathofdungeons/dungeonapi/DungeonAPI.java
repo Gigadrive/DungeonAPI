@@ -8,6 +8,7 @@ import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
 import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.*;
+import net.wrathofdungeons.dungeonapi.user.User;
 import net.wrathofdungeons.dungeonapi.util.BarUtil;
 import net.wrathofdungeons.dungeonapi.util.Util;
 import org.bukkit.Bukkit;
@@ -67,6 +68,10 @@ public class DungeonAPI extends JavaPlugin {
     }
 
     public void onDisable(){
+        for(Player p : Bukkit.getOnlinePlayers()){
+            if(User.isLoaded(p)) User.getUser(p).saveData();
+        }
+
         MySQLManager.getInstance().unload();
     }
 
