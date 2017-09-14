@@ -23,6 +23,7 @@ import org.inventivetalent.menubuilder.inventory.InventoryListener;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DungeonAPI extends JavaPlugin {
     private static DungeonAPI instance;
@@ -233,6 +234,35 @@ public class DungeonAPI extends JavaPlugin {
 
     public static void stopServer(){
         Bukkit.shutdown();
+    }
+
+    public static List<Block> blocksFromTwoPoints(Location loc1, Location loc2){
+        List<Block> blocks = new ArrayList<Block>();
+        int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+        int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+        int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+        int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+        int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+        int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+        for (int x = bottomBlockX; x <= topBlockX; x++)
+        {
+            for (int z = bottomBlockZ; z <= topBlockZ; z++)
+            {
+                for (int y = bottomBlockY; y <= topBlockY; y++)
+                {
+                    Block block = loc1.getWorld().getBlockAt(x, y, z);
+                    blocks.add(block);
+                }
+            }
+        }
+        return blocks;
+    }
+
+    public static List<Block> blocksFromTwoPointsMaximized(Location loc1, Location loc2){
+        loc1.setY(0);
+        loc2.setY(loc2.getWorld().getMaxHeight());
+
+        return blocksFromTwoPoints(loc1,loc2);
     }
 
     public static DungeonAPI getInstance(){
