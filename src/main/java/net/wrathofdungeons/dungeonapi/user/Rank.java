@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 
 public enum Rank {
     ADMIN(5,"Admin",ChatColor.DARK_RED),
-    GM(4,"Game Master",ChatColor.YELLOW),
-    MODERATOR(3,"Moderator",ChatColor.GREEN),
+    GM(4,"Game Master",ChatColor.RED),
+    MODERATOR(3,"Moderator",ChatColor.GOLD),
     DONATOR(2,"Donator",ChatColor.DARK_GREEN),
     USER(1,"User",ChatColor.WHITE);
 
