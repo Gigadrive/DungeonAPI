@@ -20,6 +20,11 @@ public class Util {
 
     public static final int MAX_INVENTORY_SIZE = INVENTORY_6ROWS;
 
+    public static final String ALPHANUMERIC_CHARACTERS_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String ALPHANUMERIC_CHARACTERS_LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+    public static final String ALPHANUMERIC_CHARACTERS_NUMBERS = "0123456789";
+    public static final String ALPHANUMERIC_CHARACTERS = ALPHANUMERIC_CHARACTERS_UPPERCASE + ALPHANUMERIC_CHARACTERS_LOWERCASE + ALPHANUMERIC_CHARACTERS_NUMBERS;
+
     public static boolean isValidInteger(String s){
         try {
             int i = Integer.parseInt(s);
@@ -102,6 +107,39 @@ public class Util {
         double randomValue = min + (max - min) * r.nextDouble();
 
         return randomValue;
+    }
+
+    public static String randomString(int length){
+        return randomString(length,length);
+    }
+
+    public static String randomString(int minimum, int maximum){
+        if(minimum > maximum){
+            int a = minimum;
+            maximum = minimum;
+            minimum = a;
+        }
+
+        String chars = ALPHANUMERIC_CHARACTERS;
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+
+        while(sb.length() < maximum){
+            int index = (int) (random.nextFloat() * chars.length());
+            sb.append(chars.charAt(index));
+        }
+
+        String s = sb.toString();
+
+        if(minimum != maximum){
+            int difference = getIntegerDifference(minimum,maximum);
+
+            if(difference > 0){
+                s = s.substring(0,s.length()-randomInteger(0,difference));
+            }
+        }
+
+        return s;
     }
 
     public static String placeZeroIfNeeded(long number) {
