@@ -10,6 +10,7 @@ import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.*;
 import net.wrathofdungeons.dungeonapi.user.User;
 import net.wrathofdungeons.dungeonapi.util.BarUtil;
+import net.wrathofdungeons.dungeonapi.util.PlayerUtilities;
 import net.wrathofdungeons.dungeonapi.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -18,6 +19,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.menubuilder.chat.ChatCommandListener;
 import org.inventivetalent.menubuilder.inventory.InventoryListener;
 
@@ -63,6 +65,13 @@ public class DungeonAPI extends JavaPlugin {
             }
 
         }).start();
+
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                PlayerUtilities.clearCaches();
+            }
+        }.runTaskTimer(this,1,5*60*20);
     }
 
     public static String getServerName(){
