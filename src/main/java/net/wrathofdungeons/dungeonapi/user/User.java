@@ -48,7 +48,7 @@ public class User {
     private Player p;
     private Rank rank;
     private Scoreboard scoreboard;
-    private ArrayList<UUID> friends;
+    private ArrayList<String> friends;
 
     public User(Player p){
         if(STORAGE.containsKey(p)) return;
@@ -88,7 +88,7 @@ public class User {
     public void reloadFriends(){
         try {
             if(friends == null){
-                friends = new ArrayList<UUID>();
+                friends = new ArrayList<String>();
             } else {
                 friends.clear();
             }
@@ -103,9 +103,9 @@ public class User {
                 String player2 = rs.getString("player2");
 
                 if(player1.equalsIgnoreCase(p.getUniqueId().toString())){
-                    friends.add(UUID.fromString(player2));
+                    friends.add(player2);
                 } else if(player2.equalsIgnoreCase(p.getUniqueId().toString())){
-                    friends.add(UUID.fromString(player1));
+                    friends.add(player1);
                 }
             }
 
@@ -142,7 +142,7 @@ public class User {
         return scoreboard;
     }
 
-    public ArrayList<UUID> getFriends() {
+    public ArrayList<String> getFriends() {
         return friends;
     }
 
