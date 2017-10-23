@@ -20,7 +20,9 @@ import org.bukkit.scoreboard.Team;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class User {
     public static HashMap<Player,User> STORAGE = new HashMap<Player,User>();
@@ -46,6 +48,7 @@ public class User {
     private Player p;
     private Rank rank;
     private Scoreboard scoreboard;
+    private ArrayList<UUID> friends;
 
     public User(Player p){
         if(STORAGE.containsKey(p)) return;
@@ -64,10 +67,7 @@ public class User {
 
                     p.setScoreboard(scoreboard);
 
-                    STORAGE.put(p,this);
-
-                    PlayerCoreDataLoadedEvent event = new PlayerCoreDataLoadedEvent(p);
-                    Bukkit.getPluginManager().callEvent(event);
+                    reloadFriends();
                 } else {
                     PreparedStatement insert = MySQLManager.getInstance().getConnection().prepareStatement("INSERT INTO `users` (`uuid`,`username`) VALUES(?,?);");
                     insert.setString(1,p.getUniqueId().toString());
@@ -83,6 +83,43 @@ public class User {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void reloadFriends(){
+        try {
+            if(friends == null){
+                friends = new ArrayList<UUID>();
+            } else {
+                friends.clear();
+            }
+
+            PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `friendships` WHERE `player1` = ? OR `player2` = ?");
+            ps.setString(1,p.getUniqueId().toString());
+            ps.setString(2,p.getUniqueId().toString());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                String player1 = rs.getString("player1");
+                String player2 = rs.getString("player2");
+
+                if(player1.equalsIgnoreCase(p.getUniqueId().toString())){
+                    friends.add(UUID.fromString(player2));
+                } else if(player2.equalsIgnoreCase(p.getUniqueId().toString())){
+                    friends.add(UUID.fromString(player1));
+                }
+            }
+
+            MySQLManager.getInstance().closeResources(rs,ps);
+
+            if(!STORAGE.containsKey(p)){
+                STORAGE.put(p,this);
+
+                PlayerCoreDataLoadedEvent event = new PlayerCoreDataLoadedEvent(p);
+                Bukkit.getPluginManager().callEvent(event);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public Player getPlayer(){
@@ -103,6 +140,10 @@ public class User {
 
     public Scoreboard getScoreboard() {
         return scoreboard;
+    }
+
+    public ArrayList<UUID> getFriends() {
+        return friends;
     }
 
     public void updateName(){
