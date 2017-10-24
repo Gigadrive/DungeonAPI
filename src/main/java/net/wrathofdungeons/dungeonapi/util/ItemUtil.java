@@ -21,6 +21,7 @@ public class ItemUtil {
 
     public static ItemStack hideFlags(ItemStack iStack, int flagValue){
         net.minecraft.server.v1_8_R3.ItemStack stack = CraftItemStack.asNMSCopy(iStack);
+        if(stack == null) return iStack;
         NBTTagCompound tag = stack.hasTag() ? stack.getTag() : new NBTTagCompound();
 
         tag.set("HideFlags", new NBTTagByte((byte)flagValue));
@@ -29,8 +30,13 @@ public class ItemUtil {
         return CraftItemStack.asBukkitCopy(stack);
     }
 
+    public static ItemStack setUnbreakable(ItemStack iStack){
+        return setUnbreakable(iStack,true);
+    }
+
     public static ItemStack setUnbreakable(ItemStack iStack, boolean unbreak){
         net.minecraft.server.v1_8_R3.ItemStack stack = CraftItemStack.asNMSCopy(iStack);
+        if(stack == null) return iStack;
         NBTTagCompound tag = stack.hasTag() ? stack.getTag() : new NBTTagCompound();
 
         if(!tag.hasKey("Unbreakable")){
@@ -43,6 +49,7 @@ public class ItemUtil {
 
     public static ItemStack addGlow(ItemStack item) {
         net.minecraft.server.v1_8_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+        if(nmsItem == null) return item;
         NBTTagCompound tag = nmsItem.hasTag() ? nmsItem.getTag() : new NBTTagCompound();
 
         if(!tag.hasKey("ench")) {
