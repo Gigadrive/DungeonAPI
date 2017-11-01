@@ -5,6 +5,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.api.CloudAPI;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.wrathofdungeons.dungeonapi.cmd.ChangeWorldCommand;
 import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
 import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.*;
@@ -110,7 +111,8 @@ public class DungeonAPI extends JavaPlugin {
     private void registerCommands(){
         getCommand("mbchat").setExecutor(chatCommandListener = new ChatCommandListener(this));
 
-        new TestCommand();
+        //new TestCommand();
+        new ChangeWorldCommand();
     }
 
     public static void async(Runnable runnable){
