@@ -49,6 +49,7 @@ public class User {
     private Rank rank;
     private Scoreboard scoreboard;
     private ArrayList<String> friends;
+    private int guildID;
 
     public User(Player p){
         if(STORAGE.containsKey(p)) return;
@@ -64,6 +65,7 @@ public class User {
 
                 if(rs.first()){
                     this.rank = Rank.fromTag(rs.getString("rank"));
+                    this.guildID = rs.getInt("guildID");
 
                     p.setScoreboard(scoreboard);
 
@@ -163,6 +165,14 @@ public class User {
                 team.addEntry(p.getName());
             }
         }
+    }
+
+    public int getGuildID() {
+        return guildID;
+    }
+
+    public void setGuildID(int guildID) {
+        this.guildID = guildID;
     }
 
     public void connect(String server){
@@ -283,9 +293,10 @@ public class User {
     public void saveData(){
         DungeonAPI.async(() -> {
             try {
-                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ? WHERE `uuid` = ?");
+                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `guildID` = ? WHERE `uuid` = ?");
                 ps.setString(1,p.getName());
-                ps.setString(2,p.getUniqueId().toString());
+                ps.setInt(2,guildID);
+                ps.setString(3,p.getUniqueId().toString());
                 ps.executeUpdate();
                 ps.close();
             } catch(Exception e){
