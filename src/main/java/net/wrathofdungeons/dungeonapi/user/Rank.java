@@ -3,20 +3,22 @@ package net.wrathofdungeons.dungeonapi.user;
 import org.bukkit.ChatColor;
 
 public enum Rank {
-    ADMIN(5,"Admin",ChatColor.DARK_RED),
-    GM(4,"Game Master",ChatColor.RED),
-    MODERATOR(3,"Moderator",ChatColor.GOLD),
-    DONATOR(2,"Donator",ChatColor.DARK_GREEN),
-    USER(1,"User",ChatColor.WHITE);
+    ADMIN(5,"Admin",ChatColor.DARK_RED,ChatColor.DARK_RED + "[" + ChatColor.RED + "Admin" + ChatColor.DARK_RED + "]"),
+    GM(4,"Game Master",ChatColor.RED,ChatColor.DARK_RED + "[" + ChatColor.RED + "GM" + ChatColor.DARK_RED + "]"),
+    MODERATOR(3,"Moderator",ChatColor.GOLD,ChatColor.GOLD + "[" + ChatColor.YELLOW + "Mod" + ChatColor.GOLD + "]"),
+    DONATOR(2,"Donator",ChatColor.DARK_GREEN,ChatColor.DARK_GREEN + "[" + ChatColor.GREEN + "Donator" + ChatColor.DARK_GREEN + "]"),
+    USER(1,"User",ChatColor.WHITE,null);
 
     private int id;
     private String name;
     private ChatColor color;
+    private String chatPrefix;
 
-    Rank(int id, String name, ChatColor color){
+    Rank(int id, String name, ChatColor color, String chatPrefix){
         this.id = id;
         this.name = name;
         this.color = color;
+        this.chatPrefix = chatPrefix;
     }
 
     public int getID(){
@@ -29,6 +31,10 @@ public enum Rank {
 
     public ChatColor getColor(){
         return this.color;
+    }
+
+    public String getChatPrefix() {
+        return chatPrefix;
     }
 
     public static Rank fromTag(String t){
