@@ -50,6 +50,7 @@ public class User {
     private Scoreboard scoreboard;
     private ArrayList<String> friends;
     private int guildID;
+    private UserSettingsManager settingsManager;
 
     public User(Player p){
         if(STORAGE.containsKey(p)) return;
@@ -66,6 +67,14 @@ public class User {
                 if(rs.first()){
                     this.rank = Rank.fromTag(rs.getString("rank"));
                     this.guildID = rs.getInt("guildID");
+
+                    this.settingsManager = new UserSettingsManager();
+                    this.settingsManager.setFriendRequests(rs.getBoolean("settings.friendRequests"));
+                    this.settingsManager.setPrivateMessages(rs.getBoolean("settings.privateMessages"));
+                    this.settingsManager.setPartyRequests(rs.getBoolean("settings.partyRequests"));
+                    this.settingsManager.setGuildRequests(rs.getBoolean("settings.guildRequests"));
+                    this.settingsManager.setDuelRequests(rs.getBoolean("settings.duelRequests"));
+                    this.settingsManager.setTradeRequests(rs.getBoolean("settings.tradeRequests"));
 
                     p.setScoreboard(scoreboard);
 
@@ -146,6 +155,10 @@ public class User {
 
     public ArrayList<String> getFriends() {
         return friends;
+    }
+
+    public UserSettingsManager getSettingsManager() {
+        return settingsManager;
     }
 
     public void updateName(){
@@ -293,10 +306,16 @@ public class User {
     public void saveData(){
         DungeonAPI.async(() -> {
             try {
-                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `guildID` = ? WHERE `uuid` = ?");
+                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `guildID` = ?, `settings.friendRequests` = ?, `settings.privateMessages` = ?, `settings.partyRequests` = ?, `settings.guildRequests` = ?, `settings.duelRequests` = ?, `settings.tradeRequests` = ? WHERE `uuid` = ?");
                 ps.setString(1,p.getName());
                 ps.setInt(2,guildID);
-                ps.setString(3,p.getUniqueId().toString());
+                ps.setBoolean(3,settingsManager.allowsFriendRequests());
+                ps.setBoolean(4,settingsManager.allowsPrivateMessages());
+                ps.setBoolean(5,settingsManager.allowsPartyRequests());
+                ps.setBoolean(6,settingsManager.allowsGuildRequests());
+                ps.setBoolean(7,settingsManager.allowsDuelRequests());
+                ps.setBoolean(8,settingsManager.allowsTradeRequests());
+                ps.setString(9,p.getUniqueId().toString());
                 ps.executeUpdate();
                 ps.close();
             } catch(Exception e){
