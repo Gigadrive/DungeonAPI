@@ -25,6 +25,12 @@ public class Util {
     public static final String ALPHANUMERIC_CHARACTERS_NUMBERS = "0123456789";
     public static final String ALPHANUMERIC_CHARACTERS = ALPHANUMERIC_CHARACTERS_UPPERCASE + ALPHANUMERIC_CHARACTERS_LOWERCASE + ALPHANUMERIC_CHARACTERS_NUMBERS;
 
+    public static boolean isAlphaNumeric(String s){
+        for(char c : s.toCharArray()) if(!ALPHANUMERIC_CHARACTERS.contains(String.valueOf(c))) return false;
+
+        return true;
+    }
+
     public static boolean isValidInteger(String s){
         try {
             int i = Integer.parseInt(s);
