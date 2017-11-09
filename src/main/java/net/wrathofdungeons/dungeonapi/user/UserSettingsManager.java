@@ -1,14 +1,14 @@
 package net.wrathofdungeons.dungeonapi.user;
 
 public class UserSettingsManager {
-    private boolean friendRequests;
-    private boolean privateMessages;
-    private boolean partyRequests;
-    private boolean guildRequests;
-    private boolean duelRequests;
-    private boolean tradeRequests;
-    private boolean showDamageIndicators;
-    private boolean showBlood;
+    private boolean friendRequests = true;
+    private boolean privateMessages = true;
+    private boolean partyRequests = true;
+    private boolean guildRequests = true;
+    private boolean duelRequests = true;
+    private boolean tradeRequests = true;
+    private boolean showDamageIndicators = true;
+    private boolean showBlood = true;
 
     public void setFriendRequests(boolean friendRequests) {
         this.friendRequests = friendRequests;
