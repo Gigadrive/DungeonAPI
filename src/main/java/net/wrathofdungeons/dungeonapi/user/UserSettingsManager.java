@@ -7,6 +7,8 @@ public class UserSettingsManager {
     private boolean guildRequests;
     private boolean duelRequests;
     private boolean tradeRequests;
+    private boolean showDamageIndicators;
+    private boolean showBlood;
 
     public void setFriendRequests(boolean friendRequests) {
         this.friendRequests = friendRequests;
@@ -54,5 +56,21 @@ public class UserSettingsManager {
 
     public boolean allowsTradeRequests() {
         return tradeRequests;
+    }
+
+    public void setShowBlood(boolean showBlood) {
+        this.showBlood = showBlood;
+    }
+
+    public boolean mayShowBlood() {
+        return showBlood;
+    }
+
+    public void setShowDamageIndicators(boolean showDamageIndicators) {
+        this.showDamageIndicators = showDamageIndicators;
+    }
+
+    public boolean mayShowDamageIndicators() {
+        return showDamageIndicators;
     }
 }

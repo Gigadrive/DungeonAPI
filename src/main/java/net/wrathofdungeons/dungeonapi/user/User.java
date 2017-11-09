@@ -1,5 +1,6 @@
 package net.wrathofdungeons.dungeonapi.user;
 
+import com.google.gson.Gson;
 import de.dytanic.cloudnet.api.CloudAPI;
 import de.dytanic.cloudnet.lib.player.CloudPlayer;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
@@ -60,6 +61,7 @@ public class User {
 
         this.p = p;
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+        Gson gson = new Gson();
 
         DungeonAPI.async(() -> {
             try {
@@ -72,13 +74,11 @@ public class User {
                     this.guildID = rs.getInt("guildID");
                     this.startGuildID = this.guildID;
 
-                    this.settingsManager = new UserSettingsManager();
-                    this.settingsManager.setFriendRequests(rs.getBoolean("settings.friendRequests"));
-                    this.settingsManager.setPrivateMessages(rs.getBoolean("settings.privateMessages"));
-                    this.settingsManager.setPartyRequests(rs.getBoolean("settings.partyRequests"));
-                    this.settingsManager.setGuildRequests(rs.getBoolean("settings.guildRequests"));
-                    this.settingsManager.setDuelRequests(rs.getBoolean("settings.duelRequests"));
-                    this.settingsManager.setTradeRequests(rs.getBoolean("settings.tradeRequests"));
+                    if(rs.getString("settings") == null || rs.getString("settings").isEmpty()){
+                        this.settingsManager = new UserSettingsManager();
+                    } else {
+                        this.settingsManager = gson.fromJson(rs.getString("settings"),UserSettingsManager.class);
+                    }
 
                     p.setScoreboard(scoreboard);
 
@@ -314,29 +314,20 @@ public class User {
     public void saveData(){
         DungeonAPI.async(() -> {
             try {
+                Gson gson = new Gson();
                 PreparedStatement ps = null;
 
                 if(this.startGuildID != this.guildID){
-                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `guildID` = ?, `settings.friendRequests` = ?, `settings.privateMessages` = ?, `settings.partyRequests` = ?, `settings.guildRequests` = ?, `settings.duelRequests` = ?, `settings.tradeRequests` = ? WHERE `uuid` = ?");
+                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `guildID` = ?, `settings` = ? WHERE `uuid` = ?");
                     ps.setString(1,p.getName());
                     ps.setInt(2,guildID);
-                    ps.setBoolean(3,settingsManager.allowsFriendRequests());
-                    ps.setBoolean(4,settingsManager.allowsPrivateMessages());
-                    ps.setBoolean(5,settingsManager.allowsPartyRequests());
-                    ps.setBoolean(6,settingsManager.allowsGuildRequests());
-                    ps.setBoolean(7,settingsManager.allowsDuelRequests());
-                    ps.setBoolean(8,settingsManager.allowsTradeRequests());
-                    ps.setString(9,p.getUniqueId().toString());
+                    ps.setString(3,gson.toJson(settingsManager));
+                    ps.setString(4,p.getUniqueId().toString());
                 } else {
-                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `settings.friendRequests` = ?, `settings.privateMessages` = ?, `settings.partyRequests` = ?, `settings.guildRequests` = ?, `settings.duelRequests` = ?, `settings.tradeRequests` = ? WHERE `uuid` = ?");
+                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `settings` = ? WHERE `uuid` = ?");
                     ps.setString(1,p.getName());
-                    ps.setBoolean(2,settingsManager.allowsFriendRequests());
-                    ps.setBoolean(3,settingsManager.allowsPrivateMessages());
-                    ps.setBoolean(4,settingsManager.allowsPartyRequests());
-                    ps.setBoolean(5,settingsManager.allowsGuildRequests());
-                    ps.setBoolean(6,settingsManager.allowsDuelRequests());
-                    ps.setBoolean(7,settingsManager.allowsTradeRequests());
-                    ps.setString(8,p.getUniqueId().toString());
+                    ps.setString(2,gson.toJson(settingsManager));
+                    ps.setString(3,p.getUniqueId().toString());
                 }
 
                 ps.executeUpdate();
