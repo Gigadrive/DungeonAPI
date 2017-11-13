@@ -3,6 +3,7 @@ package net.wrathofdungeons.dungeonapi;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import com.google.gson.Gson;
 import de.dytanic.cloudnet.api.CloudAPI;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.wrathofdungeons.dungeonapi.cmd.ChangeWorldCommand;
@@ -35,6 +36,8 @@ public class DungeonAPI extends JavaPlugin {
 
     public ChatCommandListener chatCommandListener;
     public InventoryListener inventoryListener;
+
+    public static final Gson GSON = new Gson();
 
     public void onEnable(){
         instance = this;

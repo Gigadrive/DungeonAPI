@@ -57,6 +57,10 @@ public class BarUtil {
         }
     }
 
+    public static void unregisterBar(Player p){
+        if(hasBar(p)) dragons.remove(p.getName());
+    }
+
     public static void teleportBar(Player p) {
         if(dragons.containsKey(p.getName())) {
             Location loc = p.getLocation();
@@ -90,6 +94,10 @@ public class BarUtil {
             PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(dragons.get(p.getName()).getId(), watcher, true);
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
         }
+    }
+
+    public static boolean hasBar(Player p){
+        return getPlayers().contains(p.getName());
     }
 
     public static Set<String> getPlayers() {

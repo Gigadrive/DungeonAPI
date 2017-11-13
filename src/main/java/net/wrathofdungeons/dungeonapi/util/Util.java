@@ -31,6 +31,10 @@ public class Util {
         return true;
     }
 
+    public static boolean betweenExclusive(int x, int min, int max){
+        return x>min && x<max;
+    }
+
     public static boolean isValidInteger(String s){
         try {
             int i = Integer.parseInt(s);
