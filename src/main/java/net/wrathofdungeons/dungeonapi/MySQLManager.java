@@ -38,7 +38,12 @@ public class MySQLManager {
         this.host = config.getString("mysql.host");
         this.user = config.getString("mysql.user");
         this.password = config.getString("mysql.password");
-        this.database = config.getString("mysql.database");
+        //this.database = config.getString("mysql.database");
+        if(DungeonAPI.getServerName().startsWith("Test-")){
+            this.database = "wrathofdungeons_test";
+        } else {
+            this.database = "wrathofdungeons";
+        }
         this.port = config.getInt("mysql.port");
     }
 
