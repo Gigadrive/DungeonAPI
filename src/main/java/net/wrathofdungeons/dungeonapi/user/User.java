@@ -69,8 +69,6 @@ public class User {
                 ps.setString(1,p.getUniqueId().toString());
                 ResultSet rs = ps.executeQuery();
 
-                System.out.println("LOAD DATA");
-
                 if(rs.first()){
                     this.rank = Rank.fromTag(rs.getString("rank"));
                     this.guildID = rs.getInt("guildID");
@@ -320,13 +318,13 @@ public class User {
                 PreparedStatement ps = null;
 
                 if(this.startGuildID != this.guildID){
-                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `guildID` = ?, `settings` = ? WHERE `uuid` = ?");
+                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `wrathofdungeons`.`users` SET `username` = ?, `guildID` = ?, `settings` = ? WHERE `uuid` = ?");
                     ps.setString(1,p.getName());
                     ps.setInt(2,guildID);
                     ps.setString(3,gson.toJson(settingsManager));
                     ps.setString(4,p.getUniqueId().toString());
                 } else {
-                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `users` SET `username` = ?, `settings` = ? WHERE `uuid` = ?");
+                    ps = MySQLManager.getInstance().getConnection().prepareStatement("UPDATE `wrathofdungeons`.`users` SET `username` = ?, `settings` = ? WHERE `uuid` = ?");
                     ps.setString(1,p.getName());
                     ps.setString(2,gson.toJson(settingsManager));
                     ps.setString(3,p.getUniqueId().toString());
