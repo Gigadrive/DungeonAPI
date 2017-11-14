@@ -61,13 +61,15 @@ public class User {
 
         this.p = p;
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        Gson gson = new Gson();
+        Gson gson = DungeonAPI.GSON;
 
         DungeonAPI.async(() -> {
             try {
-                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `users` WHERE `uuid` = ?");
+                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `wrathofdungeons`.`users` WHERE `uuid` = ?");
                 ps.setString(1,p.getUniqueId().toString());
                 ResultSet rs = ps.executeQuery();
+
+                System.out.println("LOAD DATA");
 
                 if(rs.first()){
                     this.rank = Rank.fromTag(rs.getString("rank"));
@@ -84,7 +86,7 @@ public class User {
 
                     reloadFriends();
                 } else {
-                    PreparedStatement insert = MySQLManager.getInstance().getConnection().prepareStatement("INSERT INTO `users` (`uuid`,`username`) VALUES(?,?);");
+                    PreparedStatement insert = MySQLManager.getInstance().getConnection().prepareStatement("INSERT INTO `wrathofdungeons`.`users` (`uuid`,`username`) VALUES(?,?);");
                     insert.setString(1,p.getUniqueId().toString());
                     insert.setString(2,p.getName());
                     insert.executeUpdate();
@@ -108,7 +110,7 @@ public class User {
                 friends.clear();
             }
 
-            PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `friendships` WHERE `player1` = ? OR `player2` = ?");
+            PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `wrathofdungeons`.`friendships` WHERE `player1` = ? OR `player2` = ?");
             ps.setString(1,p.getUniqueId().toString());
             ps.setString(2,p.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
@@ -314,7 +316,7 @@ public class User {
     public void saveData(){
         DungeonAPI.async(() -> {
             try {
-                Gson gson = new Gson();
+                Gson gson = DungeonAPI.GSON;
                 PreparedStatement ps = null;
 
                 if(this.startGuildID != this.guildID){
