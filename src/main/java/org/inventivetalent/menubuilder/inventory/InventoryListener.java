@@ -66,7 +66,7 @@ public class InventoryListener implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onInventoryClick(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked();
-		Inventory inventory = event.getClickedInventory();
+		Inventory inventory = event.getInventory();
 		ClickType type = event.getClick();
 
 		if (listenerMap.containsKey(inventory)) {
@@ -79,7 +79,7 @@ public class InventoryListener implements Listener {
 
 				for (InventoryMenuListener listener : listeners) {
 					try {
-						listener.interact(player, type, event.getSlot());
+						listener.interact(player, type, event.getRawSlot());
 					} catch (Throwable throwable) {
 						throwable.printStackTrace();
 					}
