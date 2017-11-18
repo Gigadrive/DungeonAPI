@@ -23,7 +23,7 @@ public class PlayerUtilities {
             String name = null;
 
             try {
-                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `users` WHERE `uuid` = ?");
+                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `wrathofdungeons`.`users` WHERE `uuid` = ?");
                 ps.setString(1,uuid.toString());
                 ResultSet rs = ps.executeQuery();
 
@@ -48,7 +48,7 @@ public class PlayerUtilities {
             UUID uuid = null;
 
             try {
-                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `users` WHERE `username` = ?");
+                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `wrathofdungeons`.`users` WHERE `username` = ?");
                 ps.setString(1,name);
                 ResultSet rs = ps.executeQuery();
 
