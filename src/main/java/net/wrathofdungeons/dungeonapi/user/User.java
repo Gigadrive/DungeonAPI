@@ -11,6 +11,7 @@ import net.wrathofdungeons.dungeonapi.MySQLManager;
 import net.wrathofdungeons.dungeonapi.event.PlayerCoreDataLoadedEvent;
 import net.wrathofdungeons.dungeonapi.util.BountifulAPI;
 import net.wrathofdungeons.dungeonapi.util.DefaultFontInfo;
+import net.wrathofdungeons.dungeonapi.util.PlayerUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -125,6 +126,8 @@ public class User {
             }
 
             MySQLManager.getInstance().closeResources(rs,ps);
+
+            PlayerUtilities.clearCaches(p.getUniqueId());
 
             if(!STORAGE.containsKey(p)){
                 STORAGE.put(p,this);
