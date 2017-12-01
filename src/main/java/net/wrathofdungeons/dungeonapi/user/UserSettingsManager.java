@@ -9,6 +9,7 @@ public class UserSettingsManager {
     private boolean tradeRequests = true;
     private boolean showDamageIndicators = true;
     private boolean showBlood = true;
+    private boolean killSound = true;
 
     public void setFriendRequests(boolean friendRequests) {
         this.friendRequests = friendRequests;
@@ -72,5 +73,13 @@ public class UserSettingsManager {
 
     public boolean mayShowDamageIndicators() {
         return showDamageIndicators;
+    }
+
+    public boolean playKillSound() {
+        return killSound;
+    }
+
+    public void setPlayKillSound(boolean killSound) {
+        this.killSound = killSound;
     }
 }

@@ -93,7 +93,7 @@ public class PlayerUtilities {
             ArrayList<String> friendRequests = new ArrayList<String>();
 
             try {
-                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `friend_requests` WHERE `to` = ?");
+                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `wrathofdungeons`.`friend_requests` WHERE `to` = ?");
                 ps.setString(1,uuid.toString());
 
                 ResultSet rs = ps.executeQuery();
@@ -121,7 +121,7 @@ public class PlayerUtilities {
             ArrayList<String> friendRequests = new ArrayList<String>();
 
             try {
-                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `friend_requests` WHERE `from` = ?");
+                PreparedStatement ps = MySQLManager.getInstance().getConnection().prepareStatement("SELECT * FROM `wrathofdungeons`.`friend_requests` WHERE `from` = ?");
                 ps.setString(1,uuid.toString());
 
                 ResultSet rs = ps.executeQuery();
