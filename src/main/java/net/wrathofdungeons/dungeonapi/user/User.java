@@ -140,6 +140,10 @@ public class User {
         }
     }
 
+    public void sendSettingsUpdate(){
+        DungeonAPI.executeBungeeCommand("CONSOLE","reloadsettings " + p.getName());
+    }
+
     public Player getPlayer(){
         return this.p;
     }
