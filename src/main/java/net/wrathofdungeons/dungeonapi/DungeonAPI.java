@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import de.dytanic.cloudnet.api.CloudAPI;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.wrathofdungeons.dungeonapi.cmd.ChangeWorldCommand;
+import net.wrathofdungeons.dungeonapi.cmd.PunishCommand;
 import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
 import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.*;
@@ -118,6 +119,7 @@ public class DungeonAPI extends JavaPlugin {
 
         //new TestCommand();
         new ChangeWorldCommand();
+        new PunishCommand();
     }
 
     public static void async(Runnable runnable){
