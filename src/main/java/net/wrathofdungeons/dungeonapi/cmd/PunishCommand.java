@@ -62,8 +62,8 @@ public class PunishCommand extends Command {
         final String n = name;
 
         inv.withItem(12,ItemUtil.hideFlags(ItemUtil.namedItem(Material.CLAY_BRICK,ChatColor.GREEN + "General",null)),((player, action, item) -> b(p,uuid,n,BanReason.Category.GENERAL)),ClickType.LEFT);
-        inv.withItem(13,ItemUtil.hideFlags(ItemUtil.namedItem(Material.DIAMOND_SWORD,ChatColor.RED + "Hacking",null)),((player, action, item) -> b(p,uuid,n,BanReason.Category.GENERAL)),ClickType.LEFT);
-        inv.withItem(14,ItemUtil.hideFlags(ItemUtil.namedItem(Material.BOOK_AND_QUILL,ChatColor.GOLD + "Chat Behavior",null)),((player, action, item) -> b(p,uuid,n,BanReason.Category.GENERAL)),ClickType.LEFT);
+        inv.withItem(13,ItemUtil.hideFlags(ItemUtil.namedItem(Material.DIAMOND_SWORD,ChatColor.RED + "Hacking",null)),((player, action, item) -> b(p,uuid,n,BanReason.Category.HACKING)),ClickType.LEFT);
+        inv.withItem(14,ItemUtil.hideFlags(ItemUtil.namedItem(Material.BOOK_AND_QUILL,ChatColor.GOLD + "Chat Behavior",null)),((player, action, item) -> b(p,uuid,n,BanReason.Category.CHAT_BEHAVIOR)),ClickType.LEFT);
         inv.withItem(16,ItemUtil.hideFlags(ItemUtil.namedItem(Material.BARRIER,ChatColor.DARK_RED + "Close",null)),((player, action, item) -> p.closeInventory()),ClickType.LEFT);
 
         inv.show(p);
