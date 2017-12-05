@@ -339,6 +339,8 @@ public class User {
 
                 ps.executeUpdate();
                 ps.close();
+
+                sendSettingsUpdate();
             } catch(Exception e){
                 e.printStackTrace();
             }

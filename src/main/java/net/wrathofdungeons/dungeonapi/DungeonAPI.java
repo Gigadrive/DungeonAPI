@@ -11,6 +11,7 @@ import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
 import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.*;
 import net.wrathofdungeons.dungeonapi.user.User;
+import net.wrathofdungeons.dungeonapi.util.BanReason;
 import net.wrathofdungeons.dungeonapi.util.BarUtil;
 import net.wrathofdungeons.dungeonapi.util.PlayerUtilities;
 import net.wrathofdungeons.dungeonapi.util.Util;
@@ -74,8 +75,9 @@ public class DungeonAPI extends JavaPlugin {
             @Override
             public void run() {
                 PlayerUtilities.clearCaches();
+                BanReason.init();
             }
-        }.runTaskTimer(this,1,5*60*20);
+        }.runTaskTimerAsynchronously(this,1,5*60*20);
     }
 
     public static String getServerName(){
