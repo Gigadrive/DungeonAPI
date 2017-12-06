@@ -111,7 +111,7 @@ public class PunishCommand extends Command {
             }
 
             iL.add(ChatColor.WHITE + "Type of Punishment: " + ChatColor.RED + reason.getTypeOfPunishment().toString());
-            if(reason.getTypeOfPunishment() != BanReason.PunishmentType.KICK && reason.getTypeOfPunishment() != BanReason.PunishmentType.PERMMUTE && reason.getTypeOfPunishment() != BanReason.PunishmentType.PERMBAN) iL.add(ChatColor.WHITE + "Duration: " + ChatColor.GOLD + String.valueOf(reason.getTimeValue()) + " " + reason.getTimeUnit().toLowerCase());
+            if(reason.getTypeOfPunishment() != BanReason.PunishmentType.KICK && reason.getTypeOfPunishment() != BanReason.PunishmentType.PERMBAN) iL.add(ChatColor.WHITE + "Duration: " + ChatColor.GOLD + String.valueOf(reason.getTimeValue()) + " " + reason.getTimeUnit().toLowerCase());
 
             iM.setLore(iL);
             i.setItemMeta(iM);

@@ -139,6 +139,6 @@ public class BanReason {
     }
 
     public enum PunishmentType {
-        KICK,BAN,PERMBAN,MUTE,PERMMUTE
+        KICK,BAN,PERMBAN
     }
 }
