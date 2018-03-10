@@ -4,11 +4,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
-import de.dytanic.cloudnet.api.CloudAPI;
+import de.dytanic.cloudnet.api.CloudNetAPI;
 import net.minecraft.server.v1_9_R2.NBTTagCompound;
 import net.wrathofdungeons.dungeonapi.cmd.ChangeWorldCommand;
 import net.wrathofdungeons.dungeonapi.cmd.PunishCommand;
-import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
 import net.wrathofdungeons.dungeonapi.cmd.manager.CommandManager;
 import net.wrathofdungeons.dungeonapi.listener.*;
 import net.wrathofdungeons.dungeonapi.user.User;
@@ -82,7 +81,7 @@ public class DungeonAPI extends JavaPlugin {
     }
 
     public static String getServerName(){
-        return CloudAPI.getInstance().getServerId();
+        return CloudNetAPI.getInstance().getServerId();
     }
 
     public void onDisable(){
