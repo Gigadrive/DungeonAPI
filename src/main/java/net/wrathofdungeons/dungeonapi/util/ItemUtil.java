@@ -1,11 +1,11 @@
 package net.wrathofdungeons.dungeonapi.util;
 
-import net.minecraft.server.v1_8_R3.NBTTagByte;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.NBTTagInt;
-import net.minecraft.server.v1_8_R3.NBTTagList;
+import net.minecraft.server.v1_9_R2.NBTTagByte;
+import net.minecraft.server.v1_9_R2.NBTTagCompound;
+import net.minecraft.server.v1_9_R2.NBTTagInt;
+import net.minecraft.server.v1_9_R2.NBTTagList;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_9_R2.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -20,7 +20,7 @@ public class ItemUtil {
     }
 
     public static ItemStack hideFlags(ItemStack iStack, int flagValue){
-        net.minecraft.server.v1_8_R3.ItemStack stack = CraftItemStack.asNMSCopy(iStack);
+        net.minecraft.server.v1_9_R2.ItemStack stack = CraftItemStack.asNMSCopy(iStack);
         if(stack == null) return iStack;
         NBTTagCompound tag = stack.hasTag() ? stack.getTag() : new NBTTagCompound();
 
@@ -35,7 +35,7 @@ public class ItemUtil {
     }
 
     public static ItemStack setUnbreakable(ItemStack iStack, boolean unbreak){
-        net.minecraft.server.v1_8_R3.ItemStack stack = CraftItemStack.asNMSCopy(iStack);
+        net.minecraft.server.v1_9_R2.ItemStack stack = CraftItemStack.asNMSCopy(iStack);
         if(stack == null) return iStack;
         NBTTagCompound tag = stack.hasTag() ? stack.getTag() : new NBTTagCompound();
 
@@ -48,7 +48,7 @@ public class ItemUtil {
     }
 
     public static ItemStack addGlow(ItemStack item) {
-        net.minecraft.server.v1_8_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_9_R2.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
         if(nmsItem == null) return item;
         NBTTagCompound tag = nmsItem.hasTag() ? nmsItem.getTag() : new NBTTagCompound();
 

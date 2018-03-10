@@ -5,7 +5,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import de.dytanic.cloudnet.api.CloudAPI;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_9_R2.NBTTagCompound;
 import net.wrathofdungeons.dungeonapi.cmd.ChangeWorldCommand;
 import net.wrathofdungeons.dungeonapi.cmd.PunishCommand;
 import net.wrathofdungeons.dungeonapi.cmd.TestCommand;
@@ -19,7 +19,7 @@ import net.wrathofdungeons.dungeonapi.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_9_R2.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -206,24 +206,16 @@ public class DungeonAPI extends JavaPlugin {
     }
 
     public static void nmsRemoveAI(Entity bukkitEntity) {
-        net.minecraft.server.v1_8_R3.Entity nmsEntity = ((CraftEntity) bukkitEntity)
-                .getHandle();
-        NBTTagCompound tag = nmsEntity.getNBTTag();
-        if (tag == null) {
-            tag = new NBTTagCompound();
-        }
+        net.minecraft.server.v1_9_R2.Entity nmsEntity = ((CraftEntity) bukkitEntity).getHandle();
+        NBTTagCompound tag = new NBTTagCompound();
         nmsEntity.c(tag);
         tag.setInt("NoAI", 1);
         nmsEntity.f(tag);
     }
 
     public static void nmsMakeSilent(Entity bukkitEntity) {
-        net.minecraft.server.v1_8_R3.Entity nmsEntity = ((CraftEntity) bukkitEntity)
-                .getHandle();
-        NBTTagCompound tag = nmsEntity.getNBTTag();
-        if (tag == null) {
-            tag = new NBTTagCompound();
-        }
+        net.minecraft.server.v1_9_R2.Entity nmsEntity = ((CraftEntity) bukkitEntity).getHandle();
+        NBTTagCompound tag = new NBTTagCompound();
         nmsEntity.c(tag);
         tag.setInt("Silent", 1);
         nmsEntity.f(tag);

@@ -30,15 +30,18 @@ public class PlayerCommandListener implements Listener {
                 commandWhitelist.add("mbchat");
 
                 if(commandWhitelist.contains(label)) return;
-                e.setCancelled(true);
 
                 Command cmd = null;
                 for(Command c : DungeonAPI.getCommandManager().getCommands()) if(c.matches(label)) cmd = c;
 
                 if(cmd != null && u.hasPermission(cmd.getMinRank())){
+                    e.setCancelled(true);
                     cmd.execute(p,s[0], Arrays.asList(s).subList(1, s.length).toArray(new String[]{}));
                 } else {
-                    p.sendMessage(ChatColor.RED + "Unknown command.");
+                    if(!DungeonAPI.getServerName().startsWith("TeamServer-")){
+                        e.setCancelled(true);
+                        p.sendMessage(ChatColor.RED + "Unknown command.");
+                    }
                 }
             }
         }

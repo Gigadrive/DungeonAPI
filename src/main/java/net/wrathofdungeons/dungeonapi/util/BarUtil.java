@@ -1,9 +1,9 @@
 package net.wrathofdungeons.dungeonapi.util;
 
-import net.minecraft.server.v1_8_R3.*;
+import net.minecraft.server.v1_9_R2.*;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_9_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
@@ -16,12 +16,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * Bukkit/Spigot/Bungee Java Plugin Maker.
  * EnervateD. All rights reserved.
  */
+@Deprecated
 public class BarUtil {
 
     private static Map<String, EntityEnderDragon> dragons = new ConcurrentHashMap<>();
 
     public static void setBar(Player p, String text, float healthPercent) {
-        Location loc = p.getLocation();
+        /*Location loc = p.getLocation();
         WorldServer world = ((CraftWorld) p.getLocation().getWorld()).getHandle();
 
         EntityEnderDragon dragon = new EntityEnderDragon(world);
@@ -46,7 +47,7 @@ public class BarUtil {
         }
 
         dragons.put(p.getName(), dragon);
-        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);*/
     }
 
     public static void removeBar(Player p) {
@@ -62,13 +63,13 @@ public class BarUtil {
     }
 
     public static void teleportBar(Player p) {
-        if(dragons.containsKey(p.getName())) {
+        /*if(dragons.containsKey(p.getName())) {
             Location loc = p.getLocation();
             PacketPlayOutEntityTeleport packet = new PacketPlayOutEntityTeleport(dragons.get(p.getName()).getId(),
                     (int) loc.getX() * 32, (int) (loc.getY() - 100) * 32, (int) loc.getZ() * 32,
                     (byte) ((int) loc.getYaw() * 256 / 360), (byte) ((int) loc.getPitch() * 256 / 360), false);
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
-        }
+        }*/
     }
 
     public static void updateText(Player p, String text) {
@@ -80,7 +81,7 @@ public class BarUtil {
     }
 
     public static void updateBar(Player p, String text, float healthPercent) {
-        if(dragons.containsKey(p.getName())) {
+        /*if(dragons.containsKey(p.getName())) {
             DataWatcher watcher = new DataWatcher(null);
             watcher.a(0, (byte) 0x20);
             if (healthPercent != -1) watcher.a(6, (healthPercent * 200) / 100);
@@ -93,7 +94,7 @@ public class BarUtil {
 
             PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(dragons.get(p.getName()).getId(), watcher, true);
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
-        }
+        }*/
     }
 
     public static boolean hasBar(Player p){
