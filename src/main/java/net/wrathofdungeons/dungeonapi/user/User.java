@@ -1,8 +1,8 @@
 package net.wrathofdungeons.dungeonapi.user;
 
 import com.google.gson.Gson;
-import de.dytanic.cloudnet.api.CloudNetAPI;
-import de.dytanic.cloudnet.player.PlayerWhereAmI;
+import de.dytanic.cloudnet.api.CloudAPI;
+import de.dytanic.cloudnet.lib.player.CloudPlayer;
 import net.minecraft.server.v1_9_R2.EntityPlayer;
 import net.minecraft.server.v1_9_R2.PacketPlayOutAnimation;
 import net.minecraft.server.v1_9_R2.PacketPlayOutEntityDestroy;
@@ -314,8 +314,8 @@ public class User {
         return s;
     }
 
-    public PlayerWhereAmI getCloudPlayer(){
-        return CloudNetAPI.getInstance().getOnlinePlayer(getPlayer().getUniqueId());
+    public CloudPlayer getCloudPlayer(){
+        return CloudAPI.getInstance().getOnlinePlayer(getPlayer().getUniqueId());
     }
 
     public void saveData(){

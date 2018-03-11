@@ -4,7 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
-import de.dytanic.cloudnet.api.CloudNetAPI;
+import de.dytanic.cloudnet.api.CloudAPI;
 import net.minecraft.server.v1_9_R2.NBTTagCompound;
 import net.wrathofdungeons.dungeonapi.cmd.ChangeWorldCommand;
 import net.wrathofdungeons.dungeonapi.cmd.MemoryCommand;
@@ -82,7 +82,7 @@ public class DungeonAPI extends JavaPlugin {
     }
 
     public static String getServerName(){
-        return CloudNetAPI.getInstance().getServerId();
+        return CloudAPI.getInstance().getServerId();
     }
 
     public void onDisable(){
