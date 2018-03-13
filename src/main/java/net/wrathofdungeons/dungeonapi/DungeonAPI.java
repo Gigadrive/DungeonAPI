@@ -102,6 +102,7 @@ public class DungeonAPI extends JavaPlugin {
     }
 
     private void registerListeners(){
+        Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
         Bukkit.getPluginManager().registerEvents(new LightningStrikeListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerCommandListener(), this);
