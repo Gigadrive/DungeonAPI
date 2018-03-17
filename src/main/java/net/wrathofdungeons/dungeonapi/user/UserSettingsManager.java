@@ -10,6 +10,7 @@ public class UserSettingsManager {
     private boolean showDamageIndicators = true;
     private boolean showBlood = true;
     private boolean killSound = true;
+    private boolean autoJoin = false;
 
     public void setFriendRequests(boolean friendRequests) {
         this.friendRequests = friendRequests;
@@ -81,5 +82,13 @@ public class UserSettingsManager {
 
     public void setPlayKillSound(boolean killSound) {
         this.killSound = killSound;
+    }
+
+    public boolean autoJoin() {
+        return autoJoin;
+    }
+
+    public void setAutoJoin(boolean autoJoin) {
+        this.autoJoin = autoJoin;
     }
 }
