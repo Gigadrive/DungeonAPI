@@ -6,6 +6,9 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -57,6 +60,34 @@ public class Util {
 
     public static void saveRemoteImageLocally(String url, String formatName, File file) throws Exception {
         ImageIO.write(ImageIO.read(new URL(url)), formatName, file);
+    }
+
+    public String encodeFileToBase64Binary(String fileName) throws IOException {
+        return Base64.getEncoder().encodeToString(loadFile(new File(fileName)));
+    }
+
+    public static byte[] loadFile(File file) throws IOException {
+        InputStream is = new FileInputStream(file);
+
+        long length = file.length();
+        if (length > Integer.MAX_VALUE) {
+            // File is too large
+        }
+        byte[] bytes = new byte[(int) length];
+
+        int offset = 0;
+        int numRead = 0;
+        while (offset < bytes.length
+                && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+            offset += numRead;
+        }
+
+        if (offset < bytes.length) {
+            throw new IOException("Could not completely read file " + file.getName());
+        }
+
+        is.close();
+        return bytes;
     }
 
     public static ItemStack parseItemStack(String s){
