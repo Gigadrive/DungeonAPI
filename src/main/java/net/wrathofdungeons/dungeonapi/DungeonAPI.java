@@ -303,6 +303,9 @@ public class DungeonAPI extends JavaPlugin {
     }
 
     public static boolean isInRectangleMaximized(Location loc, Location loc1, Location loc2){
+        if (loc.getWorld() == null || loc1.getWorld() == null || loc2.getWorld() == null || (loc.getWorld() != loc1.getWorld() || loc.getWorld() != loc2.getWorld()))
+            return false;
+
         loc1.setY(0);
         loc2.setY(loc2.getWorld().getMaxHeight());
 

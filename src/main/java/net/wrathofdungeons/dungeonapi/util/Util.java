@@ -4,6 +4,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -50,6 +53,10 @@ public class Util {
         } else {
             return 0;
         }
+    }
+
+    public static void saveRemoteImageLocally(String url, String formatName, File file) throws Exception {
+        ImageIO.write(ImageIO.read(new URL(url)), formatName, file);
     }
 
     public static ItemStack parseItemStack(String s){
