@@ -85,7 +85,8 @@ public class InventoryMenuBuilder extends MenuBuilder<Inventory> {
 	protected void initInventory(Inventory inventory) {
 		if (this.inventory != null) { throw new IllegalStateException("Inventory already initialized"); }
 		this.inventory = inventory;
-	}
+        this.inventory.setMaxStackSize(Integer.MAX_VALUE);
+    }
 
 	protected void validateInit() {
 		if (this.inventory == null) { throw new IllegalStateException("inventory not yet initialized"); }

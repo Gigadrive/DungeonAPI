@@ -168,6 +168,19 @@ public class User {
         return friends;
     }
 
+    public ArrayList<CloudPlayer> getOnlineFriends() {
+        ArrayList<CloudPlayer> a = new ArrayList<CloudPlayer>();
+
+        for (String uuid : getFriends()) {
+            CloudPlayer cp = CloudAPI.getInstance().getOnlinePlayer(UUID.fromString(uuid));
+
+            if (cp != null && cp.getServer() != null && !cp.getServer().isEmpty())
+                a.add(cp);
+        }
+
+        return a;
+    }
+
     public UserSettingsManager getSettingsManager() {
         return settingsManager;
     }
